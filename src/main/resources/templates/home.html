@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Hello !</h1>
+        <p>Welcome to <span th:text="${appName}">Our App</span></p>
+    </div>
+    <div class="container">
+        <form th:action="@{/submit}" method="post" th:object="${consumerRequest}">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Name</label>
+                        <input class="form-control form-control-sm" name="name" th:field="*{name}" type="text" id="formFile">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" id="status" class="form-control form-control-sm" th:field="*{status}">
+                            <option value="" disabled selected>Select Status</option>
+                            <option value="ACTIVE">Aktif</option>
+                            <option value="NONACTIVE">Non Aktif</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <label for="registrationDate" class="form-label">Registration Date</label>
+                        <input class="form-control form-control-sm" required name="registrationDate" id="registrationDate" type="date" th:field="*{registrationDate}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="province" class="form-label">Province</label>
+                        <input class="form-control form-control-sm" required name="province" type="text" id="province" th:field="*{province}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="city" class="form-label">City</label>
+                        <input class="form-control form-control-sm" required type="text" id="city" th:field="*{city}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input class="form-control form-control-sm" required id="address" name="address" type="text" th:field="*{address}">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary mb-3 float-end">Save</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="container mt-auto">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Province</th>
+                <th>Registration Date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${consumers}">
+                <td th:text="${item.getName()}">Tiger Nixon</td>
+                <td th:text="${item.getAddress()}">System Architect</td>
+                <td th:text="${item.getCity()}">Edinburgh</td>
+                <td th:text="${item.getProvince()}">61</td>
+                <td th:text="${item.getRegistrationDate()}">2011-04-25</td>
+                <td th:text="${item.getStatus()}">$320,800</td>
+            </tr>
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+            </tfoot>
+        </table>
+        <script>
+
+        </script>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+</body>
+</html>
